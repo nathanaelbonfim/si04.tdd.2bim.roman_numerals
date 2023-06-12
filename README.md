@@ -40,8 +40,8 @@ To convert a Roman numeral to an Arabic number, select option 2 from the menu. E
 Example:
 ```
 Select an option: 2
-Enter a Roman numeral: MCMXCIX
-Arabic number: 1999
+Enter a Roman numeral: X
+Arabic number: 10
 Convert another number? (Y/N): N
 Goodbye!
 ```
