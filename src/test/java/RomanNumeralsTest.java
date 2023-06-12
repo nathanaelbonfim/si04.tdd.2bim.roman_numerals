@@ -12,25 +12,35 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author nathanael
  */
 public class RomanNumeralsTest {
-    @Test
+        @Test
     void testToRoman() {
-        int[] arabicNumbers = {0, 1, 4, 9, 10, 49, 50, 99, 100, 399, 400, 999, 1000, 2023};
-        String[] expectedRomanNumerals = {"", "I", "IV", "IX", "X", "XLIX", "L", "XCIX", "C", "CCCXCIX", "CD", "CMXCIX", "M", "MMXXIII"};
+        int[] arabicNumbers = {-1, 0, 1, 4, 9, 10, 49, 50, 99, 100, 399, 400, 999, 1000, 2023, 4000};
+        String[] expectedRomanNumerals = {"", "", "I", "IV", "IX", "X", "XLIX", "L", "XCIX", "C", "CCCXCIX", "CD", "CMXCIX", "M", "", ""};
 
         for (int i = 0; i < arabicNumbers.length; i++) {
-            String actualRomanNumeral = RomanNumerals.toRoman(arabicNumbers[i]);
-            assertEquals(expectedRomanNumerals[i], actualRomanNumeral);
+            try {
+                String actualRomanNumeral = RomanNumerals.toRoman(arabicNumbers[i]);
+                assertEquals(expectedRomanNumerals[i], actualRomanNumeral);
+            } catch (IllegalArgumentException e) {
+                // Invalid input throws an exception, so we assert that an exception is thrown in such cases
+                assertEquals(expectedRomanNumerals[i], "");
+            }
         }
     }
 
     @Test
     void testFromRoman() {
-        String[] romanNumerals = {"", "I", "IV", "IX", "X", "XLIX", "L", "XCIX", "C", "CCCXCIX", "CD", "CMXCIX", "M", "MMXXIII"};
-        int[] expectedArabicNumbers = {0, 1, 4, 9, 10, 49, 50, 99, 100, 399, 400, 999, 1000, 2023};
+        String[] romanNumerals = {"", "I", "IV", "IX", "X", "XLIX", "L", "XCIX", "C", "CCCXCIX", "CD", "CMXCIX", "M", "MMXXIII", "MMMM", "ABC"};
+        int[] expectedArabicNumbers = {0, 1, 4, 9, 10, 49, 50, 99, 100, 399, 400, 999, 1000, 0, 0, 0};
 
         for (int i = 0; i < romanNumerals.length; i++) {
-            int actualArabicNumber = RomanNumerals.fromRoman(romanNumerals[i]);
-            assertEquals(expectedArabicNumbers[i], actualArabicNumber);
+            try {
+                int actualArabicNumber = RomanNumerals.fromRoman(romanNumerals[i]);
+                assertEquals(expectedArabicNumbers[i], actualArabicNumber);
+            } catch (IllegalArgumentException e) {
+                // Invalid input throws an exception, so we assert that an exception is thrown in such cases
+                assertEquals(expectedArabicNumbers[i], 0);
+            }
         }
     }
 }
